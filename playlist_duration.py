@@ -11,7 +11,7 @@ hours_patterns = re.compile(r'(\d+)H')
 minutes_pattern = re.compile(r'(\d+)M')
 seconds_patterns = re.compile(r'(\d+)S')
 
-total_video_seconds = 0
+total_playlist_seconds = 0
 
 nextPageToken = None
 
@@ -76,11 +76,11 @@ while True:
         hours, minutes, seconds = get_only_numbers(duration)
         total_seconds = timedelta(hours=hours, minutes=minutes, seconds=seconds).total_seconds()
 
-        total_video_seconds += int(total_seconds)
+        total_playlist_seconds += int(total_seconds)
 
     nextPageToken = get_api_playlist_response(playlist_id).get('nextPageToken')
 
     if not nextPageToken:
         break
 
-print_playlist_duration(total_video_seconds)
+print_playlist_duration(total_playlist_seconds)
